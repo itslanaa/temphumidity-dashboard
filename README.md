@@ -1,143 +1,143 @@
-# ESP8266 DHT11 Temperature & Humidity Monitoring Dashboard
+# Dashboard Monitoring Suhu & Kelembaban ESP8266 DHT11
 
-A real-time IoT dashboard for monitoring temperature and humidity using ESP8266 microcontroller with DHT11 sensor.
+Dashboard IoT real-time untuk monitoring suhu dan kelembaban menggunakan mikrokontroler ESP8266 dengan sensor DHT11.
 
-## 🌟 Features
+## 🌟 Fitur
 
-- **Real-time Data**: Live sensor readings every 20 seconds
-- **Modern UI**: Clean, responsive dashboard with dark/light theme
-- **Interactive Charts**: Temperature and humidity trend visualization
-- **Status Monitoring**: Connection status and sensor health indicators
-- **Data Export**: CSV export functionality for data analysis
-- **Time Filtering**: View data for different time ranges (1h, 3h, 6h, all)
-- **WebSocket Support**: Real-time updates with fallback to HTTP polling
+- **Data Real-time**: Pembacaan sensor langsung setiap 20 detik
+- **UI Modern**: Dashboard yang bersih dan responsif dengan tema gelap/terang
+- **Grafik Interaktif**: Visualisasi tren suhu dan kelembaban
+- **Monitoring Status**: Indikator status koneksi dan kesehatan sensor
+- **Ekspor Data**: Fungsi ekspor CSV untuk analisis data
+- **Filter Waktu**: Lihat data untuk rentang waktu berbeda (1j, 3j, 6j, semua)
+- **Dukungan WebSocket**: Update real-time dengan fallback ke HTTP polling
 
-## 🏗️ Architecture
+## 🏗️ Arsitektur
 
 ### Frontend (React + TypeScript)
-- **Framework**: React 18 with TypeScript
-- **Styling**: Tailwind CSS for responsive design
+- **Framework**: React 18 dengan TypeScript
+- **Styling**: Tailwind CSS untuk desain responsif
 - **Icons**: Lucide React
 - **Build Tool**: Vite
-- **Real-time**: WebSocket connection with HTTP fallback
+- **Real-time**: Koneksi WebSocket dengan fallback HTTP
 
 ### Backend (Node.js)
-- **Runtime**: Node.js with Express.js
-- **Real-time**: WebSocket server for live updates
-- **API**: RESTful endpoints for data management
-- **CORS**: Cross-origin support for frontend integration
+- **Runtime**: Node.js dengan Express.js
+- **Real-time**: Server WebSocket untuk update langsung
+- **API**: Endpoint RESTful untuk manajemen data
+- **CORS**: Dukungan cross-origin untuk integrasi frontend
 
 ### Hardware
-- **Microcontroller**: ESP8266 (NodeMCU/Wemos D1 Mini)
-- **Sensor**: DHT11 Temperature & Humidity Sensor
-- **Connectivity**: WiFi for data transmission
+- **Mikrokontroler**: ESP8266 (NodeMCU/Wemos D1 Mini)
+- **Sensor**: Sensor Suhu & Kelembaban DHT11
+- **Konektivitas**: WiFi untuk transmisi data
 
-## 🚀 Quick Start
+## 🚀 Panduan Cepat
 
-### 1. Hardware Setup
+### 1. Setup Hardware
 
-**Components needed:**
-- ESP8266 development board (NodeMCU/Wemos D1 Mini)
-- DHT11 temperature and humidity sensor
-- Jumper wires
-- Breadboard (optional)
+**Komponen yang dibutuhkan:**
+- Board pengembangan ESP8266 (NodeMCU/Wemos D1 Mini)
+- Sensor suhu dan kelembaban DHT11
+- Kabel jumper
+- Breadboard (opsional)
 
 **Wiring:**
 - DHT11 VCC → ESP8266 3.3V
 - DHT11 GND → ESP8266 GND  
-- DHT11 DATA → ESP8266 GPIO2 (D4 on NodeMCU)
+- DHT11 DATA → ESP8266 GPIO2 (D4 pada NodeMCU)
 
-### 2. Arduino Setup
+### 2. Setup Arduino
 
 1. Install Arduino IDE
-2. Install ESP8266 board package
-3. Install required libraries:
+2. Install paket board ESP8266
+3. Install library yang diperlukan:
    ```
    - DHT sensor library by Adafruit
    - ArduinoJson by Benoit Blanchon
    ```
-4. Open `arduino/esp8266_dht11.ino`
-5. Update WiFi credentials:
+4. Buka `arduino/esp8266_dht11.ino`
+5. Update kredensial WiFi:
    ```cpp
-   const char* ssid = "YOUR_WIFI_SSID";
-   const char* password = "YOUR_WIFI_PASSWORD";
+   const char* ssid = "NAMA_WIFI_ANDA";
+   const char* password = "PASSWORD_WIFI_ANDA";
    ```
-6. Update server URL with your computer's IP:
+6. Update URL server dengan IP komputer Anda:
    ```cpp
    const char* serverURL = "http://192.168.1.100:3001/api/sensor-data";
    ```
-7. Upload the sketch to ESP8266
+7. Upload sketch ke ESP8266
 
-### 3. Backend Setup
+### 3. Setup Backend
 
-1. Navigate to backend directory:
+1. Navigasi ke direktori backend:
    ```bash
    cd backend
    npm install
    ```
 
-2. Start the server:
+2. Jalankan server:
    ```bash
    npm start
    ```
    
-   For development:
+   Untuk development:
    ```bash
    npm run dev
    ```
 
-The backend will run on `http://localhost:3001`
+Backend akan berjalan di `http://localhost:3001`
 
-### 4. Frontend Setup
+### 4. Setup Frontend
 
 1. Install dependencies:
    ```bash
    npm install
    ```
 
-2. Start the development server:
+2. Jalankan development server:
    ```bash
    npm run dev
    ```
 
-The dashboard will be available at `http://localhost:5173`
+Dashboard akan tersedia di `http://localhost:5173`
 
-## 📡 API Endpoints
+## 📡 Endpoint API
 
 ### Backend API
 
-- `POST /api/sensor-data` - Receive data from ESP8266
-- `GET /api/sensor-data/latest` - Get latest sensor reading
-- `GET /api/sensor-data` - Get all sensor data with filtering
-- `GET /api/status` - Get connection status
-- `GET /api/health` - Health check endpoint
+- `POST /api/sensor-data` - Menerima data dari ESP8266
+- `GET /api/sensor-data/latest` - Mendapatkan pembacaan sensor terbaru
+- `GET /api/sensor-data` - Mendapatkan semua data sensor dengan filtering
+- `GET /api/status` - Mendapatkan status koneksi
+- `GET /api/health` - Endpoint health check
 
 ### WebSocket
 
-Real-time updates are broadcast via WebSocket on the same port as the HTTP server.
+Update real-time disiarkan melalui WebSocket pada port yang sama dengan server HTTP.
 
-## 🔧 Configuration
+## 🔧 Konfigurasi
 
-### ESP8266 Configuration
-Update these values in the Arduino sketch:
-- WiFi SSID and password
-- Server IP address and port
-- Sensor pin (default: GPIO2)
-- Update interval (default: 20 seconds)
+### Konfigurasi ESP8266
+Update nilai-nilai ini dalam sketch Arduino:
+- SSID dan password WiFi
+- Alamat IP dan port server
+- Pin sensor (default: GPIO2)
+- Interval update (default: 20 detik)
 
-### Backend Configuration
-Environment variables (optional):
-- `PORT` - Server port (default: 3001)
+### Konfigurasi Backend
+Variabel environment (opsional):
+- `PORT` - Port server (default: 3001)
 - `NODE_ENV` - Environment (development/production)
 
-### Frontend Configuration
-Update API endpoints in `src/hooks/useTemperatureData.ts`:
-- `API_BASE_URL` - Backend API URL
-- `WS_URL` - WebSocket URL
+### Konfigurasi Frontend
+Update endpoint API di `src/hooks/useTemperatureData.ts`:
+- URL API backend
+- URL WebSocket
 
-## 📊 Data Format
+## 📊 Format Data
 
-Sensor data is transmitted in JSON format:
+Data sensor dikirim dalam format JSON:
 ```json
 {
   "temperature": 29.5,
@@ -150,94 +150,94 @@ Sensor data is transmitted in JSON format:
 
 ## 🛠️ Troubleshooting
 
-### ESP8266 Issues
-- Check WiFi credentials and network connectivity
-- Verify server IP address and port
-- Monitor Serial output for debugging
-- Ensure DHT11 is properly wired
+### Masalah ESP8266
+- Periksa kredensial WiFi dan konektivitas jaringan
+- Verifikasi alamat IP dan port server
+- Monitor output Serial untuk debugging
+- Pastikan DHT11 terhubung dengan benar
 
-### Backend Issues
-- Check if port 3001 is available
-- Verify CORS settings for frontend domain
-- Monitor console logs for errors
+### Masalah Backend
+- Periksa apakah port 3001 tersedia
+- Verifikasi pengaturan CORS untuk domain frontend
+- Monitor log konsol untuk error
 
-### Frontend Issues
-- Ensure backend server is running
-- Check browser console for errors
-- Verify API endpoints are accessible
+### Masalah Frontend
+- Pastikan server backend berjalan
+- Periksa konsol browser untuk error
+- Verifikasi endpoint API dapat diakses
 
-## 📈 Features in Detail
+## 📈 Detail Fitur
 
-### Real-time Monitoring
-- Automatic data updates every 20 seconds
-- WebSocket connection for instant updates
-- Connection status indicators
+### Monitoring Real-time
+- Update data otomatis setiap 20 detik
+- Koneksi WebSocket untuk update instan
+- Indikator status koneksi
 
-### Data Visualization
-- Interactive line charts for temperature and humidity
-- Time range filtering (1h, 3h, 6h, all data)
-- Responsive design for all screen sizes
+### Visualisasi Data
+- Grafik garis interaktif untuk suhu dan kelembaban
+- Filter rentang waktu (1j, 3j, 6j, semua data)
+- Desain responsif untuk semua ukuran layar
 
-### Status Alerts
-- Normal/Abnormal temperature status (threshold: 30°C)
-- Connection status monitoring
-- Visual indicators for sensor health
+### Alert Status
+- Status suhu Normal/Abnormal (ambang batas: 30°C)
+- Monitoring status koneksi
+- Indikator visual untuk kesehatan sensor
 
-### Data Management
-- CSV export functionality
-- Data retention and cleanup
-- Historical data storage
+### Manajemen Data
+- Fungsi ekspor CSV
+- Retensi dan pembersihan data
+- Penyimpanan data historis
 
-## 🎨 UI Components
+## 🎨 Komponen UI
 
-- **Header**: App title and theme toggle
-- **Connection Status**: Real-time connection indicator
-- **Status Cards**: Current temperature, humidity, and status
-- **Controls**: Time range filter, refresh, and export buttons
-- **Chart**: Interactive temperature and humidity trends
-- **Data Summary**: Statistics and readings count
+- **Header**: Judul aplikasi dan toggle tema
+- **Status Koneksi**: Indikator koneksi real-time
+- **Kartu Status**: Suhu, kelembaban, dan status saat ini
+- **Kontrol**: Filter rentang waktu, refresh, dan tombol ekspor
+- **Grafik**: Tren suhu dan kelembaban interaktif
+- **Ringkasan Data**: Statistik dan jumlah pembacaan
 
-## 🌙 Theme Support
+## 🌙 Dukungan Tema
 
-The dashboard supports both light and dark themes with:
-- Automatic system preference detection
-- Manual theme toggle
-- Consistent styling across all components
+Dashboard mendukung tema terang dan gelap dengan:
+- Deteksi preferensi sistem otomatis
+- Toggle tema manual
+- Styling konsisten di semua komponen
 
-## 📱 Responsive Design
+## 📱 Desain Responsif
 
-Optimized for all devices:
-- Mobile phones (320px+)
-- Tablets (768px+)
-- Desktop computers (1024px+)
+Dioptimalkan untuk semua perangkat:
+- Ponsel (320px+)
+- Tablet (768px+)
+- Komputer desktop (1024px+)
 
-## 🔒 Security Considerations
+## 🔒 Pertimbangan Keamanan
 
-- CORS configuration for allowed origins
-- Input validation on backend
-- Error handling and graceful degradation
-- No sensitive data exposure
+- Konfigurasi CORS untuk origin yang diizinkan
+- Validasi input pada backend
+- Penanganan error dan degradasi yang baik
+- Tidak ada eksposur data sensitif
 
 ## 🚀 Deployment
 
-### Backend Deployment
-- Can be deployed to any Node.js hosting service
-- Update CORS origins for production domain
-- Set appropriate environment variables
+### Deployment Backend
+- Dapat di-deploy ke layanan hosting Node.js mana pun
+- Update origin CORS untuk domain produksi
+- Set variabel environment yang sesuai
 
-### Frontend Deployment
-- Build for production: `npm run build`
-- Deploy to static hosting (Netlify, Vercel, etc.)
-- Update API endpoints for production backend
+### Deployment Frontend
+- Build untuk produksi: `npm run build`
+- Deploy ke hosting statis (Netlify, Vercel, dll.)
+- Update endpoint API untuk backend produksi
 
-## 📄 License
+## 📄 Lisensi
 
-This project is open source and available under the MIT License.
+Proyek ini adalah open source dan tersedia di bawah Lisensi MIT.
 
-## 🤝 Contributing
+## 🤝 Kontribusi
 
-Contributions are welcome! Please feel free to submit issues and pull requests.
+Kontribusi sangat diterima! Silakan buat issue dan pull request.
 
-## 📞 Support
+## 📞 Dukungan
 
-For questions and support, please open an issue in the repository.
+Untuk pertanyaan dan dukungan, silakan buat issue di repository.
